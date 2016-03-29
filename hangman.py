@@ -7,40 +7,47 @@ def randomWord():
     words = open(fileName, 'r')
     wordsList = words.readlines()
 
-    return wordsList[r.randint(0,len(wordsList))]
+    return wordsList[r.randint(0,len(wordsList))].strip()
 
 
 def handleGuess(letter, word, guesses):
-    import ipdb
-    ipdb.set_trace()
     guesses.append(letter)
-    if word.index(letter) >= 0:
-        showGameWord(word, guesses)
-        isSolved(word, guesses)
+    try:
+        if word.index(letter) >= 0:
+            showGameWord(word, guesses)
+            if isSolved(word, guesses):
+                print('You Did It!')
+                return True
+    except ValueError as ve:
+        pass
     return False
 
 
 def showGameWord(word, guesses):
-    # immutable list!!!
-    workingCopy = '_'*len(word)
+    workingCopy = list('_'*len(word))
     for i in guesses:
         if word.index(i) >= 0:
-            workingCopy[word.index(i)] = i
-    print(workingCopy)
+            for w in range(0, len(workingCopy)):
+                if word[w] == i:
+                    workingCopy[w] = i
+    print(' '.join(workingCopy))
 
 
 def isSolved(word, guesses):
     chars = len(word)
-    for i in range(0,chars):
-        if guesses.index(word[i]) < 0:
-            return False
+    try:
+        for i in range(0,chars):
+            if guesses.index(word[i]) < 0:
+                return False
+    except ValueError as ve:
+        return False
     return True
 
 
 
 if __name__ == '__main__':
-    gameWord = randomWord()
-    print(gameWord)
+    gameWord = randomWord().lower()
+#    print(gameWord)
     
     guesses = []
     
