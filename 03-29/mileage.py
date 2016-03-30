@@ -97,7 +97,15 @@ def printLeastPerGal(d):
         if pricePerGal < leastPerGal[1]:
             leastPerGal = (date, pricePerGal)
     print ("%24s:\t%8s, %.2f" % ("Lowest Price per Gallon", leastPerGal[0],leastPerGal[1]))
-
+    
+def printStdDev(d):
+    #  sigma = sqrt( (1/len(d)) * sum(i)((d[i] - average))**2 )
+    #  sum = 0
+    #  for k in d:
+    #      econ = (prev - curr) / (1.0 * gallons)
+    #      sum += (econ - ave)**2 
+    #  return math.sqrt( (1/len(d)) * sum )  
+    pass
 
 dictionary = readDictionary(openFile())
 printDictionary(dictionary)
