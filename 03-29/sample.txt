@@ -1,0 +1,5 @@
+1,ID,Boise
+2,WA,Olympia
+3,CA,Sacramento
+4,NV,Carson City
+5,AK,Juneau
