@@ -1,4 +1,5 @@
 #mileage.py
+from math import sqrt
 
 def openFile(name = '/Users/tom.stear/Desktop/python_projects/03-29/fillups.txt'):
     f = open(name, "r")
@@ -31,6 +32,7 @@ def printDictionary(d):
 
 
 def printFuelEconomy(d):
+    econList = []
     for k in d:
         if k == 0:
             continue
@@ -41,7 +43,9 @@ def printFuelEconomy(d):
         prev = float(v[3])
         curr = float(v[4])
         econ = (curr - prev) / (1.0 * gallons)
+        econList.append(econ)
         print(date, econ)
+    return econList
         
 
 def printCheapFillup(d):
@@ -97,20 +101,45 @@ def printLeastPerGal(d):
         if pricePerGal < leastPerGal[1]:
             leastPerGal = (date, pricePerGal)
     print ("%24s:\t%8s, %.2f" % ("Lowest Price per Gallon", leastPerGal[0],leastPerGal[1]))
-    
-def printStdDev(d):
-    #  sigma = sqrt( (1/len(d)) * sum(i)((d[i] - average))**2 )
+
+def printOverallAverage(l):
+    sum = 0
+    for i in l:
+        sum += i
+    average = sum / len(l)
+    print('Overall Fuel Economy Average:  %.2f Miles/Gal' % average)
+    return average
+
+
+def printStdDev(d, ave):
+    #  sigma = sqrt( (1/len(d)) * summation(i)((econ - ave))**2 )
     #  sum = 0
     #  for k in d:
     #      econ = (prev - curr) / (1.0 * gallons)
     #      sum += (econ - ave)**2 
     #  return math.sqrt( (1/len(d)) * sum )  
-    pass
+    sum = 0
+    for k in d:
+        if k == 0:
+            continue
+        v = d[k]
+        gallons = float(v[2])
+        prev = float(v[3])
+        curr = float(v[4])
+        econ = (curr - prev) / (1.0 * gallons)
+        sum += (econ - ave) ** 2
+    sigma = sqrt((1/(len(d)-1)) * sum)
+    print('Std Dev:  %.2f' % sigma)
+    return sigma
 
 dictionary = readDictionary(openFile())
 printDictionary(dictionary)
-printFuelEconomy(dictionary)
+econList = printFuelEconomy(dictionary)
 printCheapFillup(dictionary)
 printExpenseFillup(dictionary)
 printLeastPerGal(dictionary)
 printMostPerGal(dictionary)
+
+average = printOverallAverage(econList)
+
+printStdDev(dictionary, average)
