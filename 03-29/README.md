@@ -5,12 +5,13 @@ Each row has the following fields:
 
 
 Write a program that will display the following:
-X - Average Fuel Economy for the entirety of available records
-  - Standard Deviation for Fuel Economy values
-X - Date of the fill-up with the best fuel economy
-X - Date of the fill-up with the worst fuel economy
-X - Date of the fill-up with the lowest price for gasoline.
-X - Date of the fill-up with the highest price for gasoline.
+
+ - Average Fuel Economy for the entirety of available records
+ - Standard Deviation for Fuel Economy values
+ - Date of the fill-up with the best fuel economy
+ - Date of the fill-up with the worst fuel economy
+ - Date of the fill-up with the lowest price for gasoline.
+ - Date of the fill-up with the highest price for gasoline.
 
 NOTE:  Fuel Economy is not included in the table.
 You will have to calculate that for each fill-up.
